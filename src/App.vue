@@ -28,7 +28,8 @@ nav a.router-link-exact-active {
   color: #42b983;
 }
 body{
-  background: #eee url("http://www.top-windows-tutorials.com/images/2013/04/2014-03-Windows-Xp-Bliss-wallpaper.jpg") no-repeat fixed center;
+  background: url(assets/bliss.jpg) no-repeat fixed center;
+  /* background: #eee url("http://www.top-windows-tutorials.com/images/2013/04/2014-03-Windows-Xp-Bliss-wallpaper.jpg") no-repeat fixed center; */
   background-size: cover;
 }
 </style>
