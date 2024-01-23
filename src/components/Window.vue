@@ -100,16 +100,30 @@ export default {
             document.removeEventListener('mouseup', this.stopResize);
             this.$el.style.transition = ''; // Zapneme prechodovú animáciu
         },
+
         changeSize(e) {
             if (this.isResizing) {
                 const deltaX = e.clientX - this.startX;
                 const deltaY = e.clientY - this.startY;
 
-                // Aktualizujeme veľkosť okna na základe pôvodnej veľkosti a rozdielu
-                this.$el.style.width = this.startWidth + deltaX + 'px';
-                this.$el.style.height = this.startHeight + deltaY + 'px';
+                // Definujeme limity
+                const minWidth = 640;
+                const minHeight = 480;
+
+                // Aktualizujeme velkost okna na základe povodnej velkosti a rozdielu medzi pozíciou myši
+                let newWidth = this.startWidth + deltaX;
+                let newHeight = this.startHeight + deltaY;
+
+                // Aplikujeme limity
+                newWidth = Math.max(minWidth, newWidth);
+                newHeight = Math.max(minHeight, newHeight);
+
+                this.$el.style.width = newWidth + 'px';
+                this.$el.style.height = newHeight + 'px';
             }
         },
+
+
         windowTypeIcon() {
             switch (this.windowType) {
                 case 'Folder':
