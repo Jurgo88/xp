@@ -3,7 +3,8 @@
 <style scoped>
 .window {
     width: 55%;
-    height: 40%;
+    min-height: 40%;
+    height: auto;
     border: 1px solid blue;
     left: 10vw;
     top: 10vw;
