@@ -2,7 +2,7 @@
 
 <style scoped>
 .window {
-    width: 35%;
+    width: 55%;
     height: 40%;
     border: 1px solid blue;
     left: 10vw;
@@ -112,12 +112,9 @@
         </div>
         </div>
         <div class="content">
-            <Computer/>
-            <!-- <span class="windowTypeIcon">
-                <img :src="windowTypeIcon()" alt="windowType" />
-            </span> -->
-            <span>{{windowType}}</span>
-            <slot></slot>
+            <slot>
+                <Computer v-if="windowType == 'Computer'"/> 
+            </slot>
         </div>
         <div class="footer">
             <slot name="footer">
@@ -260,8 +257,8 @@ export default {
                 const deltaY = e.clientY - this.startY;
 
                 // Definujeme limity
-                const minWidth = 640;
-                const minHeight = 480;
+                const minWidth = 320;
+                const minHeight = 240;
 
                 // Aktualizujeme velkost okna na základe povodnej velkosti a rozdielu medzi pozíciou myši
                 let newWidth = this.startWidth + deltaX;

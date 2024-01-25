@@ -2,6 +2,8 @@
     <div>
         <h3>My Computer</h3>
         <p><strong>Operating System:</strong> {{ operatingSystem }}</p>
+        <p><strong>Platform:</strong> {{ platform }}</p>
+        <p><strong>Engine:</strong> {{ engine }}</p>
         <p><strong>Browser:</strong> {{ browser }}</p>
         <p><strong>Screen Resolution:</strong> {{ screenResolution }}</p>
         <p><strong>IP Address:</strong> {{ ipAddress }}</p>
@@ -10,6 +12,7 @@
 </template>
 
 <script>
+import Bowser from 'bowser';
 export default {
     data() {
         return {
@@ -17,16 +20,25 @@ export default {
             browser: '',
             screenResolution: '',
             ipAddress: '',
-            username: ''
+            username: '',
+            platform: '',
+            engine: '',
         };
     },
     mounted() {
         this.getComputerInfo();
+        console.log(Bowser.parse(window.navigator.userAgent));
     },
     methods: {
         getComputerInfo() {
-            this.operatingSystem = window.navigator.platform;
-            this.browser = window.navigator.userAgent;
+            const browser = Bowser.getParser(window.navigator.userAgent);
+
+            this.operatingSystem = browser.getOSName();
+            this.operatingSystem += ' ' + browser.getOSVersion();
+            this.browser = browser.getBrowserName();
+            this.browser += ' ' + browser.getBrowserVersion();
+            this.platform = browser.getPlatformType();
+            this.engine = browser.getEngineName();
             this.screenResolution = window.screen.width + 'x' + window.screen.height;
             // You can use an API to get the user's IP address
             // For example, you can use the ipify API (https://www.ipify.org/)
