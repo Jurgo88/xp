@@ -4,15 +4,39 @@
 .window {
     width: 55%;
     min-height: 40%;
-    height: auto;
-    border: 1px solid blue;
+    max-height: 80%;
     left: 10vw;
     top: 10vw;
     position: absolute;
     z-index: 9;
     background: #eee;
     transition: width 0.3s, height 0.3s; 
+    /* overflow: hidden; */
+    
 
+}
+.content{
+    overflow-y: auto;
+    max-height: calc(100% - 65px); /* 25px odpovídá výšce vašeho footru */
+    height: 100%; 
+    width: calc(100% - 3px);
+}
+.footer {
+    height: 25px;
+    width: fill-available;
+    background-color: #ccc;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 10px;
+    position: absolute;
+    bottom: 0;
+    box-shadow: inset -1px -1px #00138c, inset 1px 1px #0831d9, inset -2px -2px #001ea0, inset 2px 2px #166aee, inset -3px -3px #003bda, inset 3px 3px #0855dd;
+
+    
 }
 #lista {
   width: auto;
@@ -41,7 +65,9 @@
 .maximized {
     
     width: 100vw !important;
-    height: 100% !important;
+    /* height: 100% !important; */
+    max-height: 100% !important;
+    height: calc(100% - 65px) !important;
     top: 0 !important;
     left: 0 !important;
     transition: width 0.5s, height 0.5s; /* Pridaná animácia */
@@ -50,8 +76,8 @@
 .minimalized {
     transition: width 0.5s, height 0.5s; /* Pridaná animácia */
     overflow: hidden; /* Skryje obsah minimalizovaného okna */
-    height: 32px !important;
-    width: 25dvh !important;
+    height: 40px !important;
+    width: 25vw !important;
 
 }
 .minimalize {
@@ -69,18 +95,7 @@
     background-color: rgb(255, 255, 255);
     opacity: 0.5;
 }
-.footer {
-    height: 25px;
-    width: fill-available;
-    background-color: #ccc;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 10px;
-}
+
 .changeSize {
     cursor: nw-resize;
     right: 0;
@@ -131,6 +146,7 @@
 
 <script>
 import Computer from './Computer.vue';
+import { onMounted } from 'vue';
 
 
 export default {
@@ -151,6 +167,16 @@ export default {
             type: Number,
             default: null,
         },
+    },
+    setup() {
+        onMounted(() => {
+            // Kód, který se spustí po zavedení komponenty
+            console.log('Komponenta Window byla načtena.');
+            console.log(this);
+            // if(this.$el.style.height >= '80%') {
+            //     this.$el.style.height = '80%';
+            // }
+        });
     },
     data() {
         return {
@@ -203,20 +229,48 @@ export default {
             e = e || window.event;
             e.preventDefault();
 
-            // if (!this.dragStarted) {
-            //     this.zIndex++;
-            //     this.$el.style.zIndex = this.zIndex;
-            //     this.dragStarted = true;
-            // }
-            // console.log(this.zIndex);
             this.pos1 = this.pos3 - e.clientX;
             this.pos2 = this.pos4 - e.clientY;
             this.pos3 = e.clientX;
             this.pos4 = e.clientY;
-            this.$el.style.top = (this.$el.offsetTop - this.pos2) + "px";
-            this.$el.style.left = (this.$el.offsetLeft - this.pos1) + "px";
-            
-        },
+
+            let newTop = this.$el.offsetTop - this.pos2;
+            let newLeft = this.$el.offsetLeft - this.pos1;
+
+            // Omezíme nové pozice na horní a levou hranici
+            newTop = Math.max(newTop, 0);
+            newLeft = Math.max(newLeft, 0);
+
+            // Získáme rozměry okna
+            const windowWidth = this.$el.offsetWidth;
+            const windowHeight = this.$el.offsetHeight;
+
+            // Spočítáme maximální povolenou spodní pozici
+            const maxBottom = window.innerHeight - 30;
+
+            // Omezíme novou spodní pozici
+            const newBottom = Math.min(maxBottom, window.innerHeight - newTop - windowHeight);
+            // console.log('new bottom '+newBottom);
+
+            // Spočítáme maximální povolenou pravou pozici
+            const maxRight = window.innerWidth - newLeft - windowWidth;
+            // console.log(maxRight);
+
+            // Omezíme novou pravou pozici
+            const newRight = Math.min(maxRight, window.innerWidth - newLeft - windowWidth);
+            // console.log('new right '+newRight);
+
+            // Toto este musim dokoncit podmienky, aby to fungovalo spravne 
+            this.$el.style.top = newTop + "px";
+            this.$el.style.left = newLeft + "px";
+            this.$el.style.bottom = newBottom + "px";
+            this.$el.style.right = newRight + "px";
+}
+
+
+
+
+,
         closeDragElement() {
             document.onmouseup = null;
             document.onmousemove = null;
@@ -229,6 +283,7 @@ export default {
         minimalizeWindow() {
             this.isMinimalized = this.isMinimalized ? false : true;
             console.log(this.isMinimalized + ' minimalizovane');
+            this.$el.style.minHeight = '40px';
 
             if(this.isMaximized) {
                 this.isMaximized = false;
@@ -244,6 +299,7 @@ export default {
             document.addEventListener('mousemove', this.changeSize);
             document.addEventListener('mouseup', this.stopResize);
             this.$el.style.transition = 'none'; // Vypneme prechodovú animáciu
+            this.$el.style.minHeight = 'none';
         },
         stopResize() {
             this.isResizing = false;
@@ -271,7 +327,10 @@ export default {
 
                 this.$el.style.width = newWidth + 'px';
                 this.$el.style.height = newHeight + 'px';
+                this.$el.style.minHeight = 'none';
+
             }
+            
         },
 
 

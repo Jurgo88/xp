@@ -9,7 +9,7 @@
         <div>Computer</div>
         </div>
         <!-- <Window v-if="windows['Computer']" key="Computer" :windowType="Computer" :visible="isWindowVisible('Computer')"  @closeWindow="closeWindow('Computer')" /> -->
-        <Window v-if="windows['Computer']" key="Computer" :windowType="'Computer'" :visible="isWindowVisible('Computer')" :zIndex="zIndex"  @closeWindow="closeWindow('Computer')" />
+        <Window v-if="windows['Computer']" key="Computer" :windowType="'Computer'" :visible="isWindowVisible('Computer')" @closeWindow="closeWindow('Computer')" />
 
 
         <div class="myIcon" @dblclick="handleIconDoubleClick('Folder')">
@@ -20,7 +20,8 @@
             />
             <span>Folder</span>
         </div>
-        <Window  v-if="windows['Folder']" :key="windows['Folder']" windowType="Folder" :visible="isWindowVisible('Folder')" :zIndex="zIndex"  @closeWindow="closeWindow('Folder')" />
+        <Window  v-if="windows['Folder']" :key="windows['Folder']" windowType="Folder" :visible="isWindowVisible('Folder')" @closeWindow="closeWindow('Folder')" />
+
 
         <div class="myIcon" @dblclick="handleIconDoubleClick('File')">
             <img
@@ -29,31 +30,9 @@
                 height="64"
             />
             <span>File</span>
-        </div>
-        <Window  v-if="windows['File']" :key="windows['File']" windowType="File" :visible="isWindowVisible('File')" :zIndex="zIndex" @closeWindow="closeWindow('File')" />
-
-
-        <!-- <div class="window" style="margin: 32px; width: 250px">
-            <div class="title-bar">
-                <div class="title-bar-text">
-                My First Program
-                </div>
-
-                <div class="title-bar-controls">
-                <button aria-label="Minimize"></button>
-                <button aria-label="Maximize"></button>
-                <button aria-label="Close"></button>
-                </div>
             </div>
-            <div class="window-body">
-                <p>Hello, world!</p>
-                <section class="field-row" style="justify-content: flex-end">
-                <button>OK</button>
-                <button>Cancel</button>
-                </section>
-            </div>
-        </div> -->
-
+            <Window  v-if="windows['File']" :key="windows['File']" windowType="File" :visible="isWindowVisible('File')" @closeWindow="closeWindow('File')" />
+   
 
     </div>
     <WinBar />
@@ -81,9 +60,7 @@ export default {
             windows: {
                 Computer: false,
                 Folder: false,
-                File: false,
             },
-            zIndex: 9,
         };
     },
     methods: {
@@ -91,9 +68,6 @@ export default {
             // Code to execute when an icon is double-clicked
             console.log(`Icon double-clicked: ${windowType}`);
             this.windows[windowType] = true;
-            this.zIndex++;
-            console.log(this.zIndex);
-            console.log(this.windows);
 
 
         },
@@ -123,4 +97,5 @@ export default {
 .myIcon i {
     margin-right: 5px;
 }
-</style>  
+</style>
+  
