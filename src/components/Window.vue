@@ -1,6 +1,7 @@
 
 
 <style scoped>
+
 .window {
     width: 55%;
     min-height: 40%;
@@ -129,7 +130,10 @@
         </div>
         <div class="content">
             <slot>
-                <Computer v-if="windowType == 'Computer'"/> 
+                <Computer v-if="windowType == 'Computer'"/>
+                <YouTube v-if="windowType == 'YouTube'"/>
+                <YouTube2 v-if="windowType == 'YouTube2'"/>
+                 
             </slot>
         </div>
         <div class="footer">
@@ -146,6 +150,8 @@
 
 <script>
 import Computer from './Computer.vue';
+import YouTube from './YouTube.vue';
+import YouTube2 from './YouTube2.vue';
 import { onMounted } from 'vue';
 
 
@@ -153,6 +159,8 @@ export default {
     name: 'Window',
     components: {
         Computer,
+        YouTube,
+        YouTube2,
     },
     props: {
         windowType: {

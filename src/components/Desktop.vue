@@ -30,9 +30,29 @@
                 height="64"
             />
             <span>File</span>
-            </div>
-            <Window  v-if="windows['File']" :key="windows['File']" windowType="File" :visible="isWindowVisible('File')" @closeWindow="closeWindow('File')" />
+        </div>
+        <Window  v-if="windows['File']" :key="windows['File']" windowType="File" :visible="isWindowVisible('File')" @closeWindow="closeWindow('File')" />
    
+        <div class="myIcon" @dblclick="handleIconDoubleClick('YouTube')">
+            <img
+                src="../assets/icons/folder.ico"
+                width="64"
+                height="64"
+            />
+            <span>YouTube</span>
+        </div>
+        <Window  v-if="windows['YouTube']" :key="windows['YouTube']" windowType="YouTube" :visible="isWindowVisible('YouTube')" @closeWindow="closeWindow('YouTube')" />
+   
+        <div class="myIcon" @dblclick="handleIconDoubleClick('YouTube2')">
+            <img
+                src="../assets/icons/folder.ico"
+                width="64"
+                height="64"
+            />
+            <span>YouTube</span>
+        </div>
+        <Window  v-if="windows['YouTube2']" :key="windows['YouTube2']" windowType="YouTube2" :visible="isWindowVisible('YouTube2')" @closeWindow="closeWindow('YouTube2')" />
+
 
     </div>
     <WinBar />
@@ -41,12 +61,14 @@
 <script>
 import Window from './Window.vue';
 import WinBar from './WinBar.vue';
+import YouTube from './YouTube.vue';
 
 export default {
     name: 'Desktop',
     components: {
         Window,
         WinBar,
+        YouTube,
     },
     props: {
         visible: {
@@ -60,6 +82,8 @@ export default {
             windows: {
                 Computer: false,
                 Folder: false,
+                File: false,
+                YouTube: false,
             },
         };
     },
