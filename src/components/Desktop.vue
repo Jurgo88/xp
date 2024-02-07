@@ -54,6 +54,13 @@
         <Window  v-if="windows['YouTube2']" :key="windows['YouTube2']" windowType="YouTube2" :visible="isWindowVisible('YouTube2')" @closeWindow="closeWindow('YouTube2')" />
 
 
+
+        <div class="myIcon" @dblclick="handleIconDoubleClick('CV')">
+            <img src="../assets/icons/183.ico" width="64" height="64" />
+            <span>CV</span>
+        </div>
+        <Window v-if="windows['CV']" :key="windows['CV']" windowType="CV" :visible="isWindowVisible('CV')" @closeWindow="closeWindow('CV')" />
+
     </div>
     <WinBar />
 </template>
@@ -84,6 +91,8 @@ export default {
                 Folder: false,
                 File: false,
                 YouTube: false,
+                YouTube2: false,
+                CV: false,
             },
         };
     },
