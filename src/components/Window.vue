@@ -133,6 +133,8 @@
                 <Computer v-if="windowType == 'Computer'"/>
                 <YouTube v-if="windowType == 'YouTube'"/>
                 <YouTube2 v-if="windowType == 'YouTube2'"/>
+                <CV v-if="windowType == 'CV'"/>
+                <Sandbox v-if="windowType == 'Sandbox'"/>
                  
             </slot>
         </div>
@@ -152,6 +154,8 @@
 import Computer from './Computer.vue';
 import YouTube from './YouTube.vue';
 import YouTube2 from './YouTube2.vue';
+import CV from './CV.vue';
+import Sandbox from './Sandbox.vue';
 import { onMounted } from 'vue';
 
 
@@ -161,6 +165,9 @@ export default {
         Computer,
         YouTube,
         YouTube2,
+        CV,
+        Sandbox,
+
     },
     props: {
         windowType: {

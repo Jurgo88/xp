@@ -61,6 +61,12 @@
         </div>
         <Window v-if="windows['CV']" :key="windows['CV']" windowType="CV" :visible="isWindowVisible('CV')" @closeWindow="closeWindow('CV')" />
 
+        <div class="myIcon" @dblclick="handleIconDoubleClick('Sandbox')">
+            <img src="../assets/icons/148.ico" width="64" height="64" />
+            <span>Sandbox</span>
+        </div>
+        <Window v-if="windows['Sandbox']" :key="windows['Sandbox']" windowType="Sandbox" :visible="isWindowVisible('Sandbox')" @closeWindow="closeWindow('Sandbox')" />
+
     </div>
     <WinBar />
 </template>
@@ -93,12 +99,12 @@ export default {
                 YouTube: false,
                 YouTube2: false,
                 CV: false,
+                Sandbox: false,
             },
         };
     },
     methods: {
         handleIconDoubleClick(windowType) {
-            // Code to execute when an icon is double-clicked
             console.log(`Icon double-clicked: ${windowType}`);
             this.windows[windowType] = true;
 
