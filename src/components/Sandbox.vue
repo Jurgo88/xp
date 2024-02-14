@@ -1,6 +1,8 @@
 <template>
     <div class="sandbox">
-        <div class="imageTop">Kokot</div>
+        <div class="imageTop">
+
+        </div>
         <div class="titleWrap">
             <h2 class="myTitle" :style="myTitleStyle">{{ titleFirstLine }}
                 <div class="titleBackground" :style="myTitleBackgroundStyle"></div>
@@ -17,7 +19,9 @@
         <br>
         <br>
         <br>
-        <div class="imageBottom">Kokot</div>
+        <div class="imageBottom">
+            
+        </div>
 
         <CustomButton buttonText="Learn More" height="" width="" @click="handleClick"/>
     </div>
