@@ -135,6 +135,7 @@
                 <YouTube2 v-if="windowType == 'YouTube2'"/>
                 <CV v-if="windowType == 'CV'"/>
                 <Sandbox v-if="windowType == 'Sandbox'"/>
+                <Lematec v-if="windowType == 'Lematec'"/>
                  
             </slot>
         </div>
@@ -156,6 +157,7 @@ import YouTube from './YouTube.vue';
 import YouTube2 from './YouTube2.vue';
 import CV from './CV.vue';
 import Sandbox from './Sandbox.vue';
+import Lematec from './Lematec.vue';
 import { onMounted } from 'vue';
 
 
@@ -167,6 +169,7 @@ export default {
         YouTube2,
         CV,
         Sandbox,
+        Lematec,
 
     },
     props: {
