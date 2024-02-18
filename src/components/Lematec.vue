@@ -108,4 +108,17 @@ watch([command, ramp], () => {
 // updateCurrent();
 });
 </script>
+```
+<style>
+input {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+}
+label {
+  display: block;
+  margin-top: 10px;
+}
+</style>
   
