@@ -82,7 +82,7 @@
 ```
 <style>
 input {
-  width: 100%;
+  width: 95%;
   padding: 12px 20px;
   margin: 8px 0;
   box-sizing: border-box;
