@@ -71,6 +71,7 @@
         for(let i = 0; i < rampTime.value * 10; i++) {
             console.log('i', i);
             // this.$el.counting.innerHTML = 'Loading...<br>';
+            //sem treba dat loading amperov
         }
 
     };
